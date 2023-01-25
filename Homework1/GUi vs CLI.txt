@@ -1,0 +1,6 @@
+A GUI (Graphical User Interface) and CLI (Command Line Interface) let you do the same things, just in diferent ways such as working with files and folders.
+
+A GUI permits users to interact with the computer using visual metaphors that are more intuitive to many, versus commands that are text based and more cumbersome to lay-persons.
+
+GUI's tend to be more user friendly, but CLI's tend to be more powerful - but require much more typing to get simple tasks completed; But CLI's are more powerful for complex repeatable tasks that can be executed on command.
+
