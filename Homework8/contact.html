@@ -1,0 +1,56 @@
+<html>
+    <title>Contact Us</title>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+
+        <script>
+            function validate(){
+                var name = document.getElementById('name');
+                if (name.value === ""){
+                    name.style.backgroundColor = "red";
+                    name.focus();
+                    return;
+                }
+
+                var name = document.getElementById('name');
+                if (name.value === ""){
+                    name.style.backgroundColor = "red";
+                    name.focus();
+                    return;
+                }
+
+                var toa = document.getElementById('agree');
+                if (!toa.checked){
+                    alert('You must first agree to the terms of agreement before posting the form');
+                    return;
+                }
+                console.log(toa.checked);
+            }
+        </script>
+    </head>
+    <body>
+        <div style="margin-left: 35px; margin-top: 20px;">
+            <h1 class="title">Contact Us</h1>
+            <form action="javascript:void(0);" style="color:white">
+                <p style="margin-top:30px;">
+                    Name: <input type="text" id="name"><br>
+                    E-mail: <input type="email" id="email">
+                </p>
+                <p>
+                    <input type="checkbox" id="agree">
+                    <label for="agree">Confirm terms of agreement</label>
+                </p>
+                <button id="btnSubmit" class="btn btn-primary" onclick="validate();">Submit My Info</button>
+            </form>
+        </div>
+        <p id="links">
+            <a href="index.html">Off to the Home Page</a>
+            &nbsp;|&nbsp;
+            <a href="story.html">Off to the Short Story</a>
+        </p>
+        
+    </body>
+</html>
