@@ -1,0 +1,58 @@
+/* this just looks for any body tags in the page */
+body{
+    background-color: ghostwhite;
+    background-image: url('../images/wallpaper1.jpg');
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(10px) brightness(60%);
+    padding: 20px;
+}
+
+.content{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    color:white;
+}
+
+/* this is a class selector */
+.title
+{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 42px;
+    color:darkred;
+}
+
+.subtitle
+{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 36px;
+    color:darkred;
+}
+
+/* this is an id selector */
+#home{
+    color:white;
+}
+
+/* this is an id selector */
+#contact{
+    color:white;
+}
+
+#links{
+    position:absolute; bottom:0;
+    color:white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 36px;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+a{
+    text-decoration: none;
+    font-size: 32px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
