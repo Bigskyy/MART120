@@ -1,0 +1,304 @@
+<html>
+    <title>Story</title>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">        <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/atom-one-dark.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <style>
+            .jumbotron {
+                background-image: url(images/wallpaper1.jpg);
+                background-size: cover;
+                height: 30%;
+                background-position: center;
+            }
+
+            .blur{
+                backdrop-filter: blur(10px) brightness(20%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="jumbotron bg-dark">
+            <p>
+                <table border="0">
+                    <tr>
+                        <td>
+                            <img src="images/p5js.svg" width="125" />
+                        </td>
+                        <td>
+                            <h1 class="ml-3">P5.js Project</h1>
+                        </td>
+                    </tr>
+                </table>
+                
+                
+            </p>
+        </div>
+
+        <p>
+            By far the most time in the course was spent learning to program for the web, with JavaScript, and then using P5.js.
+            This included much about JS and object oriented programming.  Ultimately we built somethign that could be used as
+            the foundations of a game, perhaps like Asteroids.
+        </p>
+        <p>
+            Some of the things I learned during this exercise(s):
+        </p>
+
+
+        <ul class="text-white">
+            <li>
+                Creating a canvas
+            </li>
+            <li>
+                Setting up shapes and rendering
+            </li>
+            <li>
+                Modeling shapes with JavaScript objects
+            </li>
+            <li>
+                Working with arrays 
+            </li>                    
+            <li>
+                Animating the location of items
+            </li>            
+            <li>
+                Moving items based upon keyboard input
+            </li>
+            <li>
+                Determining when something is at the edge of the canvas and moving it to the other side
+            </li>
+        </ul>
+
+        <p>
+            We spent several weeks learning to project P5.js, which also required we learn some HTML and JavaScript coding fundamentals, which also was multiple weeks of the course.
+        </p>
+
+        <p>
+            Here is a video of the final project.  In it a random number of circles of random sizes and colors are placed on a canvas, and then set in motion at random speeds
+            and directions.  The player, which is a green circle, can be moved via the WASD keys, and if you move to the exit of the canvas a message will be displayed.
+        </p>
+        <p>
+            <div class="ml-2 mt-2">
+                <iframe src="https://player.vimeo.com/video/825693914?h=dd032be073&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="640" height="360" frameborder="0"  allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="p5js"></iframe>     
+            </div>
+        </p>
+
+        <p>
+            Coding in P5.js is in JavaScript.  Here's what the code looks like:
+        </p>
+
+        <p>
+            <pre><code class="language-javascript">
+    const keys = {
+        w: 87,
+        s: 83,
+        a: 65,
+        d: 68,    
+    }
+
+    class Visual {
+        constructor(x, y, size, r, g, b, speedX, speedY){
+            this.X = x;
+            this.Y = y;
+            this.Size = size;
+            this.R = r;
+            this.G = g;
+            this.B = b;
+            this.SpeedX = speedX;
+            this.SpeedY = speedY;
+        }
+
+        display()
+        {
+            fill(this.R, this.G, this.B);
+            circle(this.X, this.Y, this.Size);
+        }
+
+        move(width, height) 
+        {
+            this.X += this.SpeedX;
+            this.Y += this.SpeedY;
+
+            if (this.X > width) this.X = 0;
+            if (this.X < 0) this.X = width;
+            if (this.Y > height) this.Y = 0;
+            if (this.Y < 0) this.Y = height;
+        }
+    }
+
+    class PLaySurface {
+        constructor(width, height, borderThickness, backgroundColor, borderColor){
+            this.Width = width;
+            this.Height = height;
+            this.BorderThickness =  borderThickness;
+            this.BackgroundColor = backgroundColor;
+            this.BorderColor = borderColor;
+        }
+
+        display()
+        {
+            background(this.BackgroundColor);
+            stroke(0);
+            fill(0);
+        
+            this.drawBorder();
+            this.drawExit();
+        }
+
+        drawBorder()
+        {
+            fill(this.BorderColor);
+            rect(0, 0, this.Width, this.BorderThickness);
+            rect(0, 0, this.BorderThickness, this.Height);
+            rect(0, this.Height-this.BorderThickness, this.Width, this.BorderThickness);
+            rect(this.Width-this.BorderThickness, 0, this.BorderThickness, this.Height-this.BorderThickness);
+        }
+
+        drawExit()
+        {
+            textSize(16);
+            text("EXIT", this.Width-50, this.Height-50)
+        }
+    }
+
+    var _player;
+    var _canvas;
+    var _obstacles = [];
+
+    function setup()
+    {
+        setupCanvas();
+        createPlayer();
+        createObstacles(_canvas);
+    }
+
+    function draw()
+    {
+        drawScene(_canvas, _player, _obstacles);
+        handleInput(_player);
+        checkIfPlayerExited(_player, _canvas);
+        moveObstacles(_obstacles, _canvas);   
+    }
+
+    function mouseClicked()
+    {
+        addObstacleAt(_obstacles, mouseX, mouseY);
+    }
+
+    function setupCanvas()
+    {
+        _canvas = new PLaySurface(600, 600, 10, '#e62d4e', 0);
+        createCanvas(_canvas.Width, _canvas.Height);
+    }
+
+    function createPlayer()
+    {
+        _player = {
+            X: 100,
+            Y: 80,
+            Speed: 5,
+            Size: 25,
+            Color: '#00ff00'
+        }    
+    }
+
+    function createRandomSpeed(){
+        return (5 + random(5)) * (floor(random(2)) * 2 - 1)  - 5;
+    }
+
+    function createObstacles(canvas)
+    {
+        var numObstacles = floor(random() * 5) + 2;
+        for (var i = 0; i < numObstacles; i++)
+        {
+            addObstacle(_obstacles, canvas);
+        }
+    }
+
+    function addObstacle(obstacles, canvas)
+    {
+        addObstacleAt(obstacles, random(canvas.Width), random(canvas.Height), canvas);
+    }
+
+    function addObstacleAt(obstacles, x, y)
+    {
+        obstacles.push(
+            new Visual(x, y, random(20) + 10, random(255), random(255), random(255), createRandomSpeed(), createRandomSpeed()));
+    }
+
+    function drawScene(canvas, player, obstacles)
+    {
+        _canvas.display();
+        drawPlayer(player);
+        drawObstacles(obstacles);
+    }
+
+    function drawPlayer(player)
+    {
+        fill(player.Color);
+        circle(player.X, player.Y, player.Size);
+    }
+
+    function drawObstacles(obstacles)
+    {
+        obstacles.forEach(visual => visual.display());
+    }
+
+    function moveObstacles(obstacles, canvas)
+    {
+        obstacles.forEach(obstacle => obstacle.move(canvas.Width, canvas.Height));
+    }
+
+    function handleInput(player)
+    {
+        // handle the keys
+        if (keyIsDown(keys.w))
+        {
+            player.Y -= player.Speed;   
+        }
+        if (keyIsDown(keys.s))
+        {
+            player.Y += player.Speed;   
+        }
+        if (keyIsDown(keys.a))
+        {
+            player.X -= player.Speed;   
+        }
+        if (keyIsDown(keys.d))
+        {
+            player.X += player.Speed;   
+        }
+    }
+
+    function checkIfPlayerExited(player, canvas)
+    {
+        // check to see if the character has left the exit
+        if (player.X > canvas.Width && player.Y > canvas.Height-50)
+        {
+            fill(0);
+            stroke(5);
+            textSize(26);
+            text("You Win!", canvas.Width/2-50, canvas.Height/2-50);
+        }
+    }
+                
+            </code></pre>
+            </p>
+        <p>
+            You can get all the code for this project by pressing this button.
+        </p>
+        <p><a class="btn btn-primary" href="https://github.com/Bigskyy/MART120/tree/main/Homework15">Go to the code</a></p>
+
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        <footer class="mt-5 bg-info text-center text-lg-start fixed-bottom text-white">
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                <a class="text-reset fw-bold" href="index.html">Home</a>
+            </div>
+        </footer>
+    </body>
+</html>

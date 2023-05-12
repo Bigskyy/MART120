@@ -8,6 +8,20 @@ body{
     padding: 20px;
 }
 
+h1{
+    color:white;
+}
+
+h2{
+    color:white;
+}
+ol{
+    list-style-type: square;
+}
+p{
+    color:white;
+}
+
 .content{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 24px;

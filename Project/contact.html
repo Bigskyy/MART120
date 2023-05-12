@@ -26,13 +26,16 @@
                     alert('You must first agree to the terms of agreement before posting the form');
                     return;
                 }
-                console.log(toa.checked);
+                alert("Thanks - I'll get back to you soon!");
             }
         </script>
     </head>
     <body>
         <div style="margin-left: 35px; margin-top: 20px;">
-            <h1 class="title">Contact Us</h1>
+            <h1>Contact</h1>
+            <p>
+                Enter your name, email and accept the ToA, and I'll get back to you ASAP!
+            </p>
             <form action="javascript:void(0);" style="color:white">
                 <p style="margin-top:30px;">
                     Name: <input type="text" id="name"><br>
@@ -45,11 +48,5 @@
                 <button id="btnSubmit" class="btn btn-primary" onclick="validate();">Submit My Info</button>
             </form>
         </div>
-        <p id="links">
-            <a href="index.html">Off to the Home Page</a>
-            &nbsp;|&nbsp;
-            <a href="story.html">Off to the Short Story</a>
-        </p>
-        
     </body>
 </html>
